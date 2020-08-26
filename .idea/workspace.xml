@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3cddf8a-9ef7-4f2f-8fc6-ce4f09874658" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/TransactionHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Transaction.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repositories/TransactionRepository.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repositories/TransactionRepositoryImpl.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usecases/TransactionUseCase.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usecases/TransactionUseCaseImpl.go" afterDir="false" />
+    <list default="true" id="e3cddf8a-9ef7-4f2f-8fc6-ce4f09874658" name="Default Changelist" comment="[FEATURE] GET ALL TRANSACTION">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/migrateTable.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/migrateTable.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/TransactionHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/TransactionHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Car.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/Car.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/CarRepositoryImpl.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/CarRepositoryImpl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Transaction.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/Transaction.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repositories/StoreRepositoryImpl.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/StoreRepositoryImpl.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usecases/CarUseCaseImpl.go" beforeDir="false" afterPath="$PROJECT_DIR$/usecases/CarUseCaseImpl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositories/TransactionRepositoryImpl.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/TransactionRepositoryImpl.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usecases/TransactionUseCaseImpl.go" beforeDir="false" afterPath="$PROJECT_DIR$/usecases/TransactionUseCaseImpl.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +57,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="GO_FMT" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
@@ -67,6 +78,10 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[FEATURE] GET ALL TRANSACTION" />
+    <option name="LAST_COMMIT_MESSAGE" value="[FEATURE] GET ALL TRANSACTION" />
+  </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
   </component>
@@ -75,5 +90,9 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="466" y="154" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1598414993114" />
+    <state x="278" y="132" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1598418396525">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="278" y="132" width="800" height="528" key="Vcs.Push.Dialog.v2/0.27.1366.741@0.27.1366.741" timestamp="1598418396525" />
   </component>
 </project>

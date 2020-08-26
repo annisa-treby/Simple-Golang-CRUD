@@ -11,7 +11,7 @@ type Car struct {
 	CarModelYear int    `json:"car_model_year"`
 	Availability bool   `json:"availability"`
 	StoreID      uint
-	Transaction  []*Transaction `gorm:"many2many:transaction_cars;"`
+	Transaction  []*Transaction `gorm:"many2many:transaction_cars;association_autoupdate:false;association_autoucreate:false"`
 }
 
 func (c Car) TableName() string {

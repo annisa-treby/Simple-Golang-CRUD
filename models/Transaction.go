@@ -4,5 +4,6 @@ import "github.com/jinzhu/gorm"
 
 type Transaction struct {
 	gorm.Model
-	Cars []*Car `gorm:"many2many:transaction_cars;"`
+	Total int64  `json:"total"`
+	Cars  []*Car `gorm:"many2many:transaction_cars;association_autoupdate:false;association_autoucreate:false"`
 }

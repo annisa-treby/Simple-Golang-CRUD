@@ -42,7 +42,7 @@ func (s StoreRepositoryImpl) DeleteStore(id int) error {
 
 func (s StoreRepositoryImpl) GetAllStore() (*[]models.Store, error) {
 	var stores []models.Store
-	err := s.db.Preload("Cars").Find(&stores).Error
+	err := s.db.Set("gorm:auto_preload", true).Find(&stores).Error
 	if err != nil {
 		log.Fatal(err)
 	}

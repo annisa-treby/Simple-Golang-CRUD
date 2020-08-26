@@ -3,10 +3,12 @@ package usecases
 import (
 	"car-mysql/models"
 	"car-mysql/repositories"
+	"log"
 )
 
 type TransactionUseCaseImpl struct {
 	transactionRepo repositories.TransactionRepository
+	carUseCase      CarUseCase
 }
 
 func (t TransactionUseCaseImpl) GetAllTransaction() (*[]models.Transaction, error) {
@@ -18,7 +20,16 @@ func (t TransactionUseCaseImpl) GetTransactionByID(id int) (*models.Transaction,
 }
 
 func (t TransactionUseCaseImpl) CreateTransaction(transaction *models.Transaction) (*models.Transaction, error) {
-	panic("implement me")
+	var total int64
+	for _, car := range transaction.Cars {
+		car, err := t.carUseCase.GetCarById(int(car.ID))
+		if err != nil {
+			log.Fatal(err)
+		}
+		total += car.Price
+	}
+	transaction.Total = total
+	return t.transactionRepo.CreateTransaction(transaction)
 }
 
 func (t TransactionUseCaseImpl) UpdateTransaction(id int, transaction *models.Transaction) (*models.Transaction, error) {
@@ -26,9 +37,9 @@ func (t TransactionUseCaseImpl) UpdateTransaction(id int, transaction *models.Tr
 }
 
 func (t TransactionUseCaseImpl) DeleteTransaction(id int) error {
-	panic("implement me")
+	return t.transactionRepo.DeleteTransaction(id)
 }
 
-func CreateTransactionUseCase(transactionRepo repositories.TransactionRepository) TransactionUseCase {
-	return &TransactionUseCaseImpl{transactionRepo}
+func CreateTransactionUseCase(transactionRepo repositories.TransactionRepository, carUseCase CarUseCase) TransactionUseCase {
+	return &TransactionUseCaseImpl{transactionRepo, carUseCase}
 }

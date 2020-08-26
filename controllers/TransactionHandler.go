@@ -1,10 +1,13 @@
 package controllers
 
 import (
+	"car-mysql/models"
 	"car-mysql/usecases"
 	"car-mysql/utils"
+	"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
+	"strconv"
 )
 
 type TransactionController struct {
@@ -16,12 +19,41 @@ func CreateTransactionController(r *mux.Router, transactionUseCase usecases.Tran
 	transactionController := TransactionController{transactionUseCase}
 
 	r.HandleFunc("/transactions", transactionController.getAllTransaction).Methods(http.MethodGet)
+	r.HandleFunc("/transaction", transactionController.CreateTransaction).Methods(http.MethodPost)
+	s := r.PathPrefix("/transaction").Subrouter()
+	s.HandleFunc("/{id}", transactionController.deleteTransaction).Methods(http.MethodDelete)
 }
 
+func (t TransactionController) deleteTransaction(resp http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, err := strconv.Atoi(params["id"])
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadRequest, err.Error())
+	}
+	err = t.transactionUseCase.DeleteTransaction(id)
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadGateway, err.Error())
+	}
+	utils.HandleSuccess(resp, http.StatusOK, nil)
+}
 func (t TransactionController) getAllTransaction(resp http.ResponseWriter, r *http.Request) {
 	transactions, err := t.transactionUseCase.GetAllTransaction()
 	if err != nil {
 		utils.HandleError(resp, http.StatusInternalServerError, err.Error())
 	}
 	utils.HandleSuccess(resp, http.StatusOK, transactions)
+}
+
+func (t TransactionController) CreateTransaction(resp http.ResponseWriter, r *http.Request) {
+	var body models.Transaction
+	err := json.NewDecoder(r.Body).Decode(&body)
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadRequest, err.Error())
+	}
+	transaction, err := t.transactionUseCase.CreateTransaction(&body)
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadGateway, err.Error())
+	}
+
+	utils.HandleSuccess(resp, http.StatusOK, transaction)
 }

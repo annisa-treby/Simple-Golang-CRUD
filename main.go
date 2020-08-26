@@ -21,6 +21,7 @@ func main() {
 	db := config.Config()
 	defer db.Close()
 	config.Migrate(db)
+	db.LogMode(true)
 
 	router := mux.NewRouter().StrictSlash(true)
 
@@ -33,7 +34,7 @@ func main() {
 	controllers.CreateStoreController(router, storeUseCase)
 
 	transactionRepo := repositories.CreateTransactionRepository(db)
-	transactionUseCase := usecases.CreateTransactionUseCase(transactionRepo)
+	transactionUseCase := usecases.CreateTransactionUseCase(transactionRepo, carUseCase)
 	controllers.CreateTransactionController(router, transactionUseCase)
 
 	err := http.ListenAndServe(":"+port, router)
