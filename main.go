@@ -12,7 +12,7 @@ import (
 	"os"
 )
 
-func init(){
+func init() {
 	gotenv.Load()
 }
 
@@ -26,11 +26,15 @@ func main() {
 
 	carRepo := repositories.CreateCarRepository(db)
 	carUseCase := usecases.CreateCarUseCase(carRepo)
-	controllers.CreateCarController(router,carUseCase)
+	controllers.CreateCarController(router, carUseCase)
 
 	storeRepo := repositories.CreateStoreRepository(db)
 	storeUseCase := usecases.CreateStoreUseCase(storeRepo)
-	controllers.CreateStoreController(router,storeUseCase)
+	controllers.CreateStoreController(router, storeUseCase)
+
+	transactionRepo := repositories.CreateTransactionRepository(db)
+	transactionUseCase := usecases.CreateTransactionUseCase(transactionRepo)
+	controllers.CreateTransactionController(router, transactionUseCase)
 
 	err := http.ListenAndServe(":"+port, router)
 	if err != nil {

@@ -26,6 +26,7 @@ func (c CarUseCaseImpl) GetCarById(id int) (*models.Car, error) {
 }
 
 func (c CarUseCaseImpl) InsertNewCar(car *models.Car) (*models.Car, error) {
+	car.Availability = true
 	return c.carRepo.InsertNewCar(car)
 }
 

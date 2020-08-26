@@ -16,24 +16,24 @@ func CreateStoreRepository(db *gorm.DB) StoreRepository {
 
 func (s StoreRepositoryImpl) GetStoreById(id int) (*models.Store, error) {
 	var store models.Store
-	err := s.db.First(&store, id).Error
-	if err!=nil {
+	err := s.db.Preload("Cars").First(&store, id).Error
+	if err != nil {
 		log.Fatal(err)
 	}
-	return &store,err
+	return &store, err
 }
 
 func (s StoreRepositoryImpl) UpdateStore(id int, store *models.Store) (*models.Store, error) {
-	err := s.db.Model(&store).Where("id = ?",id).Update(store).Error
-	if err!=nil {
+	err := s.db.Model(&store).Where("id = ?", id).Update(store).Error
+	if err != nil {
 		log.Fatal(err)
 	}
-	return store,err
+	return store, err
 }
 
 func (s StoreRepositoryImpl) DeleteStore(id int) error {
 	store := models.Store{}
-	err := s.db.Table("store").Where("id = ?",id).First(&store).Delete(&store).Error
+	err := s.db.Table("store").Where("id = ?", id).First(&store).Delete(&store).Error
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,7 +46,7 @@ func (s StoreRepositoryImpl) GetAllStore() (*[]models.Store, error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return &stores,err
+	return &stores, err
 }
 
 func (s StoreRepositoryImpl) InsertNewStore(store *models.Store) (*models.Store, error) {
@@ -54,5 +54,5 @@ func (s StoreRepositoryImpl) InsertNewStore(store *models.Store) (*models.Store,
 	if err != nil {
 		log.Fatal(err)
 	}
-	return store,err
+	return store, err
 }
