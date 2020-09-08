@@ -22,6 +22,39 @@ func CreateTransactionController(r *mux.Router, transactionUseCase usecases.Tran
 	r.HandleFunc("/transaction", transactionController.CreateTransaction).Methods(http.MethodPost)
 	s := r.PathPrefix("/transaction").Subrouter()
 	s.HandleFunc("/{id}", transactionController.deleteTransaction).Methods(http.MethodDelete)
+	s.HandleFunc("/{id}", transactionController.getTransactionByID).Methods(http.MethodGet)
+	s.HandleFunc("/{id}", transactionController.updateTransaction).Methods(http.MethodPut)
+}
+
+func (t TransactionController) updateTransaction(resp http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, err := strconv.Atoi(params["id"])
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadRequest, err.Error())
+	}
+	var body models.Transaction
+	err = json.NewDecoder(r.Body).Decode(&body)
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadRequest, err.Error())
+	}
+	transaction, err := t.transactionUseCase.UpdateTransaction(id, &body)
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadGateway, err.Error())
+	}
+	utils.HandleSuccess(resp, http.StatusOK, transaction)
+}
+
+func (t TransactionController) getTransactionByID(resp http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, err := strconv.Atoi(params["id"])
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadRequest, err.Error())
+	}
+	transaction, err := t.transactionUseCase.GetTransactionByID(id)
+	if err != nil {
+		utils.HandleError(resp, http.StatusBadGateway, err.Error())
+	}
+	utils.HandleSuccess(resp, http.StatusOK, transaction)
 }
 
 func (t TransactionController) deleteTransaction(resp http.ResponseWriter, r *http.Request) {

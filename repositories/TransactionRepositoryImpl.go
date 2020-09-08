@@ -24,7 +24,12 @@ func (t TransactionRepositoryImpl) GetAllTransaction() (*[]models.Transaction, e
 }
 
 func (t TransactionRepositoryImpl) GetTransactionByID(id int) (*models.Transaction, error) {
-	panic("implement me")
+	var transaction models.Transaction
+	err := t.db.Set("gorm:auto_preload", true).First(&transaction, id).Error
+	if err != nil {
+		log.Fatal(err)
+	}
+	return &transaction, err
 }
 
 func (t TransactionRepositoryImpl) CreateTransaction(transaction *models.Transaction) (*models.Transaction, error) {
@@ -36,7 +41,11 @@ func (t TransactionRepositoryImpl) CreateTransaction(transaction *models.Transac
 }
 
 func (t TransactionRepositoryImpl) UpdateTransaction(id int, transaction *models.Transaction) (*models.Transaction, error) {
-	panic("implement me")
+	err := t.db.Model(&transaction).Where("id=?", id).Update(transaction).Error
+	if err != nil {
+		log.Fatal(err)
+	}
+	return transaction, err
 }
 
 func (t TransactionRepositoryImpl) DeleteTransaction(id int) error {

@@ -16,7 +16,7 @@ func (t TransactionUseCaseImpl) GetAllTransaction() (*[]models.Transaction, erro
 }
 
 func (t TransactionUseCaseImpl) GetTransactionByID(id int) (*models.Transaction, error) {
-	panic("implement me")
+	return t.transactionRepo.GetTransactionByID(id)
 }
 
 func (t TransactionUseCaseImpl) CreateTransaction(transaction *models.Transaction) (*models.Transaction, error) {
@@ -33,7 +33,7 @@ func (t TransactionUseCaseImpl) CreateTransaction(transaction *models.Transactio
 }
 
 func (t TransactionUseCaseImpl) UpdateTransaction(id int, transaction *models.Transaction) (*models.Transaction, error) {
-	panic("implement me")
+	return t.transactionRepo.UpdateTransaction(id, transaction)
 }
 
 func (t TransactionUseCaseImpl) DeleteTransaction(id int) error {
